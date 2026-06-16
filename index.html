@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luke de Boer — Senior Software Engineer</title>
+<meta name="description" content="Luke de Boer — Senior Software Engineer at The University of Queensland. Full stack engineer who solves difficult problems: event-driven architecture, microservices, AWS, TypeScript and mission-critical SaaS." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Luke de Boer — Senior Software Engineer" />
+<meta property="og:description" content="Full stack software engineer who solves difficult problems." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- RetroUI / neo-brutalist tokens ---------- */
+  :root{
+    --bg:        #fffdf2;
+    --ink:       #0a0a0a;
+    --yellow:    #ffdb33;
+    --pink:      #ff7a93;
+    --blue:      #8fb8ff;
+    --lime:      #9be15d;
+    --lilac:     #c9a7ff;
+    --paper:     #ffffff;
+    --shadow:    6px 6px 0 0 var(--ink);
+    --shadow-sm: 4px 4px 0 0 var(--ink);
+    --shadow-lg: 10px 10px 0 0 var(--ink);
+    --border:    3px solid var(--ink);
+    --radius:    4px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:"Space Grotesk", system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    /* subtle dotted brutalist backdrop */
+    background-image:radial-gradient(var(--ink) 1.1px, transparent 1.1px);
+    background-size:26px 26px;
+    background-position:-13px -13px;
+  }
+
+  h1,h2,h3,.display{ font-family:"Archivo Black", sans-serif; letter-spacing:-0.5px; line-height:1.02; text-transform:uppercase; }
+
+  a{ color:inherit; }
+  ::selection{ background:var(--yellow); color:var(--ink); }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
+
+  /* ---------- generic brutalist box ---------- */
+  .box{
+    background:var(--paper);
+    border:var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  .tag{
+    display:inline-block;
+    font-weight:700;
+    font-size:.82rem;
+    padding:6px 12px;
+    border:var(--border);
+    border-radius:var(--radius);
+    background:var(--paper);
+    box-shadow:var(--shadow-sm);
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .tag:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 0 var(--ink); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:"Archivo Black", sans-serif;
+    text-transform:uppercase;
+    font-size:.95rem;
+    text-decoration:none;
+    padding:14px 22px;
+    background:var(--yellow);
+    border:var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .btn:hover{ transform:translate(-2px,-2px); box-shadow:var(--shadow-lg); }
+  .btn:active{ transform:translate(3px,3px); box-shadow:2px 2px 0 0 var(--ink); }
+  .btn.alt{ background:var(--paper); }
+  .btn.pink{ background:var(--pink); }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--yellow);
+    border-bottom:var(--border);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand{ font-family:"Archivo Black", sans-serif; font-size:1.15rem; text-decoration:none; display:flex; align-items:center; gap:10px; }
+  .brand .dot{ width:18px; height:18px; background:var(--pink); border:2.5px solid var(--ink); display:inline-block; }
+  .nav-links{ display:flex; gap:6px; }
+  .nav-links a{
+    text-decoration:none; font-weight:700; font-size:.9rem;
+    padding:8px 12px; border:2.5px solid transparent; border-radius:var(--radius);
+    text-transform:uppercase; letter-spacing:.5px;
+  }
+  .nav-links a:hover{ border:2.5px solid var(--ink); background:var(--paper); box-shadow:var(--shadow-sm); }
+  .menu-btn{ display:none; background:var(--paper); border:var(--border); border-radius:var(--radius); padding:8px 12px; font-weight:700; cursor:pointer; box-shadow:var(--shadow-sm); }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:70px 0 50px; }
+  .hero .eyebrow{
+    display:inline-block; background:var(--lime); border:var(--border); border-radius:var(--radius);
+    box-shadow:var(--shadow-sm); padding:6px 14px; font-weight:700; text-transform:uppercase;
+    letter-spacing:1px; font-size:.78rem; margin-bottom:22px;
+  }
+  .hero h1{ font-size:clamp(2.6rem, 8vw, 5.2rem); margin-bottom:18px; }
+  .hero h1 .hl{ background:var(--yellow); padding:0 8px; box-shadow:var(--shadow-sm); border:var(--border); display:inline-block; transform:rotate(-1.5deg); }
+  .hero .lead{ font-size:clamp(1.05rem,2.4vw,1.4rem); max-width:640px; font-weight:500; margin-bottom:30px; }
+  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:40px; }
+
+  .stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .stat{ padding:18px; text-align:center; }
+  .stat .num{ font-family:"Archivo Black", sans-serif; font-size:1.9rem; }
+  .stat .lbl{ font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
+  .stat:nth-child(1){ background:var(--blue); }
+  .stat:nth-child(2){ background:var(--pink); }
+  .stat:nth-child(3){ background:var(--lilac); }
+
+  /* ---------- section scaffolding ---------- */
+  section{ padding:54px 0; }
+  .sec-head{ display:flex; align-items:center; gap:16px; margin-bottom:34px; }
+  .sec-head .num{
+    font-family:"Archivo Black", sans-serif; font-size:1rem;
+    background:var(--ink); color:var(--bg); padding:6px 12px; border-radius:var(--radius);
+  }
+  .sec-head h2{ font-size:clamp(1.7rem,5vw,2.6rem); }
+
+  /* ---------- about ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:28px; }
+  .about-text{ padding:30px; }
+  .about-text p{ margin-bottom:16px; font-size:1.02rem; }
+  .about-text p:last-child{ margin-bottom:0; }
+  .about-text .kicker{ font-family:"Archivo Black", sans-serif; font-size:1.15rem; text-transform:uppercase; }
+  .about-side{ display:flex; flex-direction:column; gap:18px; }
+  .about-card{ padding:22px; }
+  .about-card.y{ background:var(--yellow); }
+  .about-card h3{ font-size:1.05rem; margin-bottom:10px; }
+  .about-card ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .about-card li{ font-weight:600; display:flex; gap:8px; align-items:flex-start; }
+  .about-card li::before{ content:"▸"; font-weight:900; }
+
+  /* ---------- skills ---------- */
+  .skills-top{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
+  .skills-top .tag{ background:var(--yellow); font-size:.92rem; }
+  .stack-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:14px; }
+  .stack-item{
+    padding:16px; font-weight:700; text-align:center; background:var(--paper);
+    border:var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm);
+    transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .stack-item:hover{ transform:translate(-2px,-2px); box-shadow:var(--shadow); }
+  .stack-item:nth-child(4n+1){ background:var(--blue); }
+  .stack-item:nth-child(4n+2){ background:var(--lime); }
+  .stack-item:nth-child(4n+3){ background:var(--pink); }
+  .stack-item:nth-child(4n+4){ background:var(--lilac); }
+
+  /* ---------- experience ---------- */
+  .exp-list{ display:flex; flex-direction:column; gap:22px; }
+  .exp{ padding:26px; position:relative; }
+  .exp .when{
+    display:inline-block; background:var(--ink); color:var(--bg); font-weight:700;
+    font-size:.74rem; text-transform:uppercase; letter-spacing:1px; padding:5px 10px;
+    border-radius:var(--radius); margin-bottom:12px;
+  }
+  .exp .when.now{ background:var(--lime); color:var(--ink); border:2.5px solid var(--ink); }
+  .exp h3{ font-size:1.3rem; margin-bottom:4px; }
+  .exp .org{ font-weight:700; margin-bottom:12px; }
+  .exp ul{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .exp li{ display:flex; gap:10px; align-items:flex-start; font-size:1rem; }
+  .exp li::before{ content:"■"; color:var(--pink); font-size:.7rem; line-height:1.6; }
+
+  /* ---------- contact ---------- */
+  .contact{ }
+  .contact-box{ padding:46px 30px; text-align:center; background:var(--yellow); }
+  .contact-box h2{ font-size:clamp(2rem,6vw,3.4rem); margin-bottom:14px; }
+  .contact-box p{ font-weight:500; font-size:1.1rem; max-width:480px; margin:0 auto 28px; }
+  .contact-actions{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:var(--border); background:var(--ink); color:var(--bg); }
+  .foot-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding:26px 0; }
+  .foot-inner a{ text-decoration:none; font-weight:700; }
+  .foot-inner a:hover{ color:var(--yellow); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .about-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:680px){
+    .nav-links{
+      display:none; position:absolute; top:64px; left:0; right:0;
+      flex-direction:column; background:var(--yellow); border-bottom:var(--border);
+      padding:14px 20px; gap:10px;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ border:var(--border); background:var(--paper); box-shadow:var(--shadow-sm); }
+    .menu-btn{ display:block; }
+    .stat-row{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>LUKE&nbsp;DE&nbsp;BOER</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">MENU ▾</button>
+  </div>
+</header>
+
+<main id="top">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">● Available — drop me a line anytime</span>
+    <h1>Senior Software<br>Engineer who solves<br><span class="hl">difficult problems.</span></h1>
+    <p class="lead">
+      Full stack engineer with strong architecture sensibilities and high-level
+      business strategy. I design, build and protect mission-critical SaaS and
+      core systems — from event-driven integrations to microservices on AWS.
+    </p>
+    <div class="hero-cta">
+      <a class="btn" href="#contact">Get in touch →</a>
+      <a class="btn alt" href="#experience">See my work</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat box"><div class="num">10+</div><div class="lbl">Languages &amp; frameworks</div></div>
+      <div class="stat box"><div class="num">Cross-functional</div><div class="lbl">Teams led &amp; built</div></div>
+      <div class="stat box"><div class="num">Mission-critical</div><div class="lbl">SaaS &amp; infrastructure</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>About</h2></div>
+    <div class="about-grid">
+      <div class="about-text box">
+        <p class="kicker">I'm a full stack software engineer who solves difficult problems.</p>
+        <p>Lateral-minded, with strong engineering skills complemented by
+          micro-service architecture design sensibilities and a high-level
+          business strategy mindset.</p>
+        <p>I've led and built cross-functional teams to deploy and maintain
+          mission-critical SaaS applications relied on by multinational
+          aerospace companies, and built bespoke transport-focused SaaS sales
+          and OPS products for Australia's largest freight companies.</p>
+        <p>I designed and oversaw the engineering of event-driven architecture
+          handling LMS to Source-of-Truth system integrations and core systems
+          at The University of Queensland — and identified and patched numerous
+          potential vulnerabilities within cyber initiatives throughout UQ.</p>
+      </div>
+      <aside class="about-side">
+        <div class="about-card y box">
+          <h3>Currently</h3>
+          <p style="font-weight:600">Senior Software Engineer at <strong>The University of Queensland</strong> — designing, developing, protecting and maintaining critical infrastructure depended on by our nation's brightest minds.</p>
+        </div>
+        <div class="about-card box">
+          <h3>What I bring</h3>
+          <ul>
+            <li>Micro-service architecture</li>
+            <li>Event-driven systems</li>
+            <li>High-level business strategy</li>
+            <li>Security &amp; vulnerability remediation</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>Top Skills</h2></div>
+    <div class="skills-top">
+      <span class="tag">Amazon Web Services (AWS)</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">CI / CD</span>
+      <span class="tag">PHP</span>
+      <span class="tag">Microservices</span>
+    </div>
+
+    <div class="sec-head" style="margin-top:14px"><span class="num">03</span><h2>The Stack</h2></div>
+    <div class="stack-grid">
+      <div class="stack-item">Java</div>
+      <div class="stack-item">PHP</div>
+      <div class="stack-item">Symfony</div>
+      <div class="stack-item">JavaScript</div>
+      <div class="stack-item">TypeScript</div>
+      <div class="stack-item">Node</div>
+      <div class="stack-item">React</div>
+      <div class="stack-item">MySQL</div>
+      <div class="stack-item">Oracle DB</div>
+      <div class="stack-item">Jest</div>
+      <div class="stack-item">Pest</div>
+      <div class="stack-item">AWS</div>
+      <div class="stack-item">Bitbucket</div>
+      <div class="stack-item">GitHub</div>
+      <div class="stack-item">Jenkins</div>
+      <div class="stack-item">Microservices</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>Experience</h2></div>
+    <div class="exp-list">
+
+      <article class="exp box">
+        <span class="when now">● Current</span>
+        <h3>Senior Software Engineer</h3>
+        <div class="org">The University of Queensland</div>
+        <ul>
+          <li>Design, develop, protect and maintain critical infrastructure depended on by our nation's brightest minds.</li>
+          <li>Designed and oversaw the engineering of event-driven architecture handling LMS to Source-of-Truth system integrations and core systems.</li>
+          <li>Identified and patched numerous potential vulnerabilities within cyber initiatives throughout UQ.</li>
+        </ul>
+      </article>
+
+            <article class="exp box">
+        <span class="when">Aerospace</span>
+        <h3>Engineering Lead — Mission-Critical SaaS</h3>
+        <div class="org">Multinational aerospace companies</div>
+        <ul>
+          <li>Led and built cross-functional teams to deploy and maintain mission-critical SaaS applications.</li>
+          <li>Drove deployment and reliability for systems relied on across the organisation.</li>
+        </ul>
+      </article>
+
+      <article class="exp box">
+        <span class="when">Transport &amp; Freight</span>
+        <h3>Full Stack Engineer — Bespoke SaaS Products</h3>
+        <div class="org">Australia's largest freight companies</div>
+        <ul>
+          <li>Built bespoke transport-focused SaaS sales and operations (OPS) products.</li>
+          <li>Applied micro-service architecture design across CI/CD deployment pipelines on AWS, Bitbucket, GitHub and Jenkins.</li>
+        </ul>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-box box">
+      <h2>Drop me a line<br>anytime.</h2>
+      <p>Got a difficult problem worth solving? Let's talk architecture, systems, or strategy.</p>
+      <div class="contact-actions">
+        <a class="btn alt" href="mailto:lukedeboer48@gmail.com">✉ Email me</a>
+        <a class="btn pink" href="https://github.com/lukedeboer" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-inner">
+    <span style="font-family:'Archivo Black',sans-serif">LUKE DE BOER</span>
+    <span style="font-weight:600">Senior Software Engineer — Built in the brutalist style.</span>
+    <a href="mailto:lukedeboer48@gmail.com">lukedeboer48@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+  // mobile menu toggle
+  const btn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+</body>
+</html>
